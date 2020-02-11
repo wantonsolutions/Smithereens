@@ -1,0 +1,14 @@
+\section{Abstract}
+\label{sec:abstract}
+
+Ever increasing networking speeds continue to shrink the communication
+latency between remote and local CPU cores. Furthermore the
+requirements for modern operating systems have seen their complexities
+grow on the order of millions of lines of code, decreasing their
+performance and increasing their security vulnerabilities.  In this work
+we propose an architectural vision for a distributed rack scale
+operating system with a centralized kernel and distributed user space.
+We draw the line of distribution at the point of privilege escalation.
+Privileged kernel code runs on a single centralized host, and user
+space processes execute on dedicated remote resources with a razor thin
+cache of kernel state for performance.

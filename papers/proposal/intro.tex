@@ -1,0 +1,40 @@
+\section{Ideas--(Introduction)}
+\label{sec:intro}
+
+This is not a proper introduction just a glom of current ideas.
+
+\subsection{RPC}
+
+Current RPC systems have gained extremely high performance using
+technologies such as DPDK and RDMA. These often obtain extremely low
+latencies of the order ~\todo{GRPC}~\todo{RPCs can be general and
+fast}. However, low latency for RPCs will only increase at networks
+expand into 400 and 800 Gbps speeds~\todo{Broadcomm}, and the distance
+between CPU silicon and the network is reduced by removing PCIe
+latencies via~\todo{tuning PCIe host networking}~\todo{attach CPU
+ethernet}, and reducing packet delivery time to cores by directly
+delivering packets to L2 and L1 caches. Finally application data
+marshalling costs have reach near-zero overhead via techniques such as
+protobufs~\todo{protobufs}.
+
+We propose the end-to-end combination of each of these technologies to
+produce the lowest latency RPC possible. We speculate that RPC
+latencies can be as low as \sg{1us}.
+
+Using this approximation of a best case RPC we profile Linux system
+calls on a variety of criteria and report their latencies running on a
+commodity server. These benchmarks provide a baseline for the
+computational overhead of running kernel tasks on remote machines.
+Using these benchmarks we find the subset of Linux systems calls which
+increase in latency by less than 1 percent by issuing them remotely,
+and report on the overhead of calls such as \emph{GetPID} which
+increase dramatically. Using these latencies as guidelines we split
+kernel state into local and remote kernel structures. Remote
+structures remain in a monolithic kernel, and local structures are kept
+in a process level cache.
+
+We simulate the cost of running complex applications be capturing the
+system calls of two real applications, and add the remote invocation
+overhead to to calculate the cost of utilizing a remote kernel.
+
+
